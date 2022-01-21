@@ -6,7 +6,7 @@ use strum_macros::EnumIter;
 
 fn main() {
     App::new()
-        .add_plugins(MinimalPlugins)
+        .add_plugins(DefaultPlugins)
         // This plugin maps inputs to an input-type agnostic action-state
         // We need to provide it with an enum which stores the possible actions a player could take
         .add_plugin(InputManagerPlugin::<Action>::default())
@@ -119,9 +119,7 @@ fn spawn_player(mut commands: Commands) {
                 input_map: PlayerBundle::default_input_map(),
                 action_state: ActionState::default(),
             },
-        })
-        .insert(Player)
-        .insert_bundle(InputManagerBundle::<Action>::default());
+        });
 }
 
 fn cast_fireball(query: Query<&ActionState<Action>, With<Player>>) {
